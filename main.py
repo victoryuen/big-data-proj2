@@ -1,5 +1,4 @@
 import pandas as pd 
-from Classes import Compound
 
 
 
@@ -16,6 +15,5 @@ def main():
     for index,row in compound_nodes_df.iterrows():
         dict_compounds[row["name"]] = []
         
-    
 if __name__ == "__main__":
     main()
