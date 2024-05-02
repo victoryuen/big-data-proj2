@@ -12,7 +12,7 @@ def main():
     # print(dict_compound_bind_gene)
     # print(dict_disease_upregulate_gene)
 
-    print("--------- Part 2 ---------")
+    print("--------- Part 2 ---------\n")
 
     compound_bind_gene_count = mapreduce(dict_compound_bind_gene)
     top_compounds = sorted(compound_bind_gene_count.items(), key = lambda x: x[1], reverse=True)
