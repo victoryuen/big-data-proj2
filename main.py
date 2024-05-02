@@ -1,5 +1,6 @@
 from functools import reduce
 from data_extraction import *
+from mapreduce import *
 
 def mapper(compound_binds):
     compound, binds = compound_binds
@@ -14,12 +15,20 @@ def main():
     dict_compound_bind_gene = get_relationships("Compound", "CbG")
     dict_disease_upregulate_gene = get_relationships("Disease", "DuG")
 
-    #map data
+    # Part 2
+    # map data
     mapped_data = reduce(lambda x, y: x + y, map(mapper, dict_compound_bind_gene.items()))
-    #reduce 
+
+    # reduce 
     compound_counts = reduce(reducer, mapped_data, {})
-    print(compound_counts.get("Compound::DB01268"))
-    print(max(compound_counts, key=compound_counts.get))
+
+    #Top 5 
+    #print(compound_counts.items())
+    top_compounds = sorted(compound_counts.items(), key= lambda x: x[1],reverse=True)
+    print("The top 5 compounds are ", top_compounds[:5])
+
+    # Part 3
+
     
 if __name__ == "__main__":
     main()
