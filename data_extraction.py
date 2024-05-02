@@ -4,12 +4,18 @@ nodes_df = pd.read_csv('nodes_test.tsv', sep='\t')
 edges_df = pd.read_csv('edges_test.tsv', sep='\t')
 
 def create_dict(dataframe):
+    """
+    Creates a dictionary of all the source nodes that we're expecting
+    """
     dictionary = {}
     for index,row in dataframe.iterrows():
         dictionary[row["id"]] = []
     return dictionary
 
 def populate_dict(dataframe,dictionary):
+    """
+    Match the expected source nodes to their target nodes
+    """
     for index,row in dataframe.iterrows():
         dictionary[row["source"]].append(row["target"])
 
@@ -27,3 +33,9 @@ def get_relationships(node_type, edge_type):
     populate_dict(relationships_df, dict_nodes)
 
     return dict_nodes
+
+def id_to_name(id):
+    """
+    Given a node id, return the node's name
+    """
+    # TODO implement
