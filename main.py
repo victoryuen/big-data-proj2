@@ -28,6 +28,23 @@ def main():
     for disease in top_diseases[:5]:
         print(disease[0], disease[1]) # TODO: data_extraction.py: a function for id --> name
 
+    print("\n---------- Part 5a ----------\n")
+
+    # something like this
+    # r_3 = hashtable_memory_use(compound_bind_gene_count, folding_hash, 3)
+    # r_4 = hashtable_memory_use(compound_bind_gene_count, folding_hash, 4)
+
+    # print(((r_3 < r_4) ? "r = 3" : "r = 4"), "uses the least storage")
+
+    print("\n---------- Part 5b ----------\n")
+
+    # something like this
+    # r_3 = hashtable_memory_use(disease_upregulate_gene_count, folding_hash, 3)
+    # r_4 = hashtable_memory_use(disease_upregulate_gene_count, folding_hash, 4)
+
+    # print(((r_3 < r_4) ? "r = 3" : "r = 4"), "uses the least storage")
+
+
     
 if __name__ == "__main__":
     main()
