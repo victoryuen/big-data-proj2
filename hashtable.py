@@ -2,6 +2,7 @@ def folding_hash(id, r, table_size):
     """
     Compute hash using folding method
     """
+#some assert tests
 
 def hashtable_memory_use(relationship_count, hashing_function, r):
     """
