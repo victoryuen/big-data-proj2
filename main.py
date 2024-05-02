@@ -1,5 +1,6 @@
 from data_extraction import *
 from mapreduce import *
+from hashtable import *
 
 def main():
     # Part 1
