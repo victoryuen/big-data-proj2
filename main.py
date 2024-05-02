@@ -1,14 +1,6 @@
-import pandas as pd 
 from functools import reduce
+from data_extraction import *
 
-def create_dict(dataframe):
-    dictionary = {}
-    for index,row in dataframe.iterrows():
-        dictionary[row["id"]] = []
-    return dictionary
-def populate_dict(dataframe,dictionary):
-    for index,row in dataframe.iterrows():
-        dictionary[row["source"]].append(row["target"])
 def mapper(compound_binds):
     compound, binds = compound_binds
     return [(compound, 1) for _ in binds]
@@ -18,14 +10,12 @@ def reducer(counts, pair):
     return counts
 
 def main():
-    nodes_df = pd.read_csv('nodes_test.tsv', sep='\t')
-    edges_df = pd.read_csv('edges_test.tsv', sep='\t')
-    compound_nodes_df = nodes_df[nodes_df.kind == "Compound"]
-    dict_compounds = create_dict(compound_nodes_df)
-    binds_df = edges_df[edges_df.metaedge == "CbG"]
-    populate_dict(binds_df,dict_compounds)
+    # Part 1
+    dict_compound_bind_gene = get_relationships("Compound", "CbG")
+    dict_disease_upregulate_gene = get_relationships("Disease", "DuG")
+
     #map data
-    mapped_data = reduce(lambda x, y: x + y, map(mapper, dict_compounds.items()))
+    mapped_data = reduce(lambda x, y: x + y, map(mapper, dict_compound_bind_gene.items()))
     #reduce 
     compound_counts = reduce(reducer, mapped_data, {})
     print(compound_counts.get("Compound::DB01268"))
