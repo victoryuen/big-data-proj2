@@ -1,19 +1,27 @@
-import pandas as pd 
+from functools import reduce
+from data_extraction import *
 
-
+def mapper(compound_binds):
+    compound, binds = compound_binds
+    return [(compound, 1) for _ in binds]
+def reducer(counts, pair):
+    compound, bind_count = pair
+    counts[compound] = counts.get(compound, 0) + bind_count
+    return counts
 
 def main():
+    # Part 1
+    dict_compound_bind_gene = get_relationships("Compound", "CbG")
+    dict_disease_upregulate_gene = get_relationships("Disease", "DuG")
 
-    nodes_df = pd.read_csv('nodes_test.tsv', sep='\t')
-    edges_df = pd.read_csv('edges_test.tsv', sep='\t')
+    #map data
+    mapped_data = reduce(lambda x, y: x + y, map(mapper, dict_compound_bind_gene.items()))
+    #reduce 
+    compound_counts = reduce(reducer, mapped_data, {})
+    print(compound_counts.get("Compound::DB01268"))
+    print(max(compound_counts, key=compound_counts.get))
     
-    list_of_compounds = []
-    dict_compounds = {}
-    compound_nodes_df = nodes_df[nodes_df.kind == "Compound"]
-    binds_df = edges_df[edges_df.metaedge == "CbG"]
-    #print(len(binds_df[binds_df.source == "Compound::DB01435"]))
-    for index,row in compound_nodes_df.iterrows():
-        dict_compounds[row["name"]] = []
-        
 if __name__ == "__main__":
     main()
+
+

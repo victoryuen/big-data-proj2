@@ -1,0 +1,4 @@
+Notes for mapreduce
+- Iterate through dictionary
+- For each key's values add it to a Lis t 
+- reduce by dictionary frequency
