@@ -35,11 +35,11 @@ def get_relationships(node_type, edge_type):
     return dict_nodes
 
 def id_to_name(id,dataframe):
-    id_query = dataframe[dataframe.id == id]
-    name = next(id_query.iterrows())[1]
-    return name["name"]
     """
     Given a node id, return the node's name
     """
-    # TODO implement
+    id_query = dataframe[dataframe.id == id]
+    name = next(id_query.iterrows())[1]
+    return name["name"]
+   
 
