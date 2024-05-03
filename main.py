@@ -18,16 +18,18 @@ def main():
     top_compounds = sorted(compound_bind_gene_count.items(), key = lambda x: x[1], reverse=True)
     print("Top 5 compounds based on bindings with genes:")
     for compound in top_compounds[:5]:
-        print(compound[0], compound[1]) # TODO: data_extraction.py: a function for id --> name
-
+       
+        name_compound = id_to_name(compound[0],nodes_df)
+        print(name_compound, compound[1]) 
     print("\n--------- Part 3 ---------\n")
 
     disease_upregulate_gene_count = mapreduce(dict_disease_upregulate_gene)
     top_diseases = sorted(disease_upregulate_gene_count.items(), key = lambda x: x[1], reverse=True)
     print("Top 5 disease based on upregulation with genes:")
     for disease in top_diseases[:5]:
-        print(disease[0], disease[1]) # TODO: data_extraction.py: a function for id --> name
-
+        name_disease = id_to_name(disease[0],nodes_df)
+        print(name_disease, disease[1]) 
+        
     print("\n---------- Part 5a ----------\n")
 
     # something like this
