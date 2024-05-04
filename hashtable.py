@@ -41,6 +41,7 @@ def mid_square_hash(id,r):
     middle = math.floor(amt_digits/2)
     # default even = middle 2, odd = middle
     half_r = math.floor(r/2)
+    print(middle)
     if(amt_digits%2 == 0):
         
         if(r%2 == 0):
@@ -49,9 +50,9 @@ def mid_square_hash(id,r):
             result = string_squared_id[middle-half_r :middle+half_r +1]
     else:
         if(r%2 == 0):
-            result = string_squared_id[middle-half_r :middle+half_r +1]
+            result = string_squared_id[middle-half_r+1:middle+half_r+1]
         else:
-            result = string_squared_id[middle-half_r :middle+half_r ]
+            result = string_squared_id[middle-half_r :middle+half_r+1]
     print(result)
     
 
