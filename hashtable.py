@@ -1,23 +1,17 @@
 import math 
-def folding_hash(id, r, ): 
+def folding_hash(id, r, table_size): 
 
     """
     Compute hash using folding method
     """
-    #r = 2 or r = 3
-    # take first  r digits then
-    # while loop 
-    # 10245
-    # 102+452+12
-    # 012 345 67
-    # len 7%3=  2
+   
     stringed_id = str(id)
     num_digits = len(stringed_id)
     left_over_digits = num_digits % r
     count = 0 
     temp_str = ""
     sum = 0 
-    for i in range(num_digits-left_over_digits):  #count = 0    # r = 2     temp_str =  24 sum = 10+24  i = 4      num_of_digits = 5 
+    for i in range(num_digits-left_over_digits):
         print("i:",i)
         print("count",count)
         temp_str+=stringed_id[i] 
@@ -31,7 +25,7 @@ def folding_hash(id, r, ):
     for j in range(left_over_digits):
         temp_str+=stringed_id[num_digits-left_over_digits+j]
     sum+=int(temp_str)
-    return sum
+    return sum % table_size
 
 
 
