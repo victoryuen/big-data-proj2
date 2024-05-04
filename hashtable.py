@@ -25,16 +25,44 @@ def folding_hash(id, r, table_size):
     return sum % table_size
 
 
-def mid_square_hash(id,r,table_size):
+def mid_square_hash(id,r):
+    #square 
     #r = 2 or r = 3 
-    #grab middle of id
     # if r >= string ver of (id) just use the whole id -> base case
-    # Example : 10245 with r = 2
-    #  want 24  from it so take the middle then alternate right and left  from middle 
-    # until r is reached
-    #Example : 10245 with r = 3 
-    # want 024 -> Take 2 then 4 then 0 
-    # return result % table size
+    # chck if even or odd
+    # when even there will be middle two and grow from there
+    # when odd middle one grow from there 
+    squared_id = id**2
+    print(squared_id)
+    string_squared_id= str(squared_id)
+    amt_digits = len(string_squared_id)
+    if r >= amt_digits:
+        return id 
+    middle = math.floor(amt_digits/2)
+    # default even = middle 2, odd = middle
+    half_r = math.floor(r/2)
+    if(amt_digits%2 == 0):
+        
+        if(r%2 == 0):
+            result = string_squared_id[middle-half_r:middle+half_r]
+        else:
+            result = string_squared_id[middle-half_r :middle+half_r +1]
+    else:
+        if(r%2 == 0):
+            result = string_squared_id[middle-half_r :middle+half_r +1]
+        else:
+            result = string_squared_id[middle-half_r :middle+half_r ]
+    print(result)
+    
+
+
+
+
+    
+
+
+
+    
 
 
 #some assert tests
@@ -52,7 +80,7 @@ def hashtable_memory_use(relationship_count, hashing_function, r):
     entries_per_hashtable = math.ceil(len(relationship_count) / 10)
     count_entries = 0
     count_tables = 0
-    for key,val in relationship_count:  
+    #for key,val in relationship_count:  
 
 
    
