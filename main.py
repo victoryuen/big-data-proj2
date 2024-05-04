@@ -15,8 +15,10 @@ def main():
     print("--------- Part 2 ---------\n")
 
     compound_bind_gene_count = mapreduce(dict_compound_bind_gene)
+    
     top_compounds = sorted(compound_bind_gene_count.items(), key = lambda x: x[1], reverse=True)
     print("Top 5 compounds based on bindings with genes:")
+    
     for compound in top_compounds[:5]:
        
         name_compound = id_to_name(compound[0],nodes_df)
@@ -31,7 +33,7 @@ def main():
         print(name_disease, disease[1]) 
         
     print("\n---------- Part 5a ----------\n")
-
+    
     # something like this
     # r_3 = hashtable_memory_use(compound_bind_gene_count, folding_hash, 3)
     # r_4 = hashtable_memory_use(compound_bind_gene_count, folding_hash, 4)
