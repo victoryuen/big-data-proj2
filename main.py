@@ -40,8 +40,11 @@ def main():
 
     if r_2 < r_3:
         print("r=2 uses less memory at", r_2, "vs", r_3)
-    else:
+    elif r_3 > r_2:
         print("r=3 uses less memory at", r_3, "vs", r_2)
+    else:
+        print("both use the same memory at", r_3)
+
 
     print("\n---------- Part 5b ----------\n")
 
@@ -50,9 +53,10 @@ def main():
 
     if r_2 < r_3:
         print("r=2 uses less memory at", r_2, "vs", r_3)
-    else:
+    elif r_3 > r_2:
         print("r=3 uses less memory at", r_3, "vs", r_2)
-
+    else:
+        print("both use the same memory at", r_3)
     
 if __name__ == "__main__":
     main()
