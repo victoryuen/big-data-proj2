@@ -73,13 +73,28 @@ For each DISEASE, compute the number of GENE(s) that are UPREGULATES (DuG) using
 ### Pseudocode
 
 ```
-goes here
+node, edge = dict_DuG.items()
+initial_counts = [(node, 1) for _ in edge]
+
+counts = {}
+node, edge_count = initial_counts
+counts[node] = counts.get(node, 0) + edge_count
+
+sort(counts)
+
+for disease of counts.items()[:5]:
+    print(nodes_df[id == disease[0].id][name], disease[1])
 ```
 
 ### Output
 
 ```
-goes here
+Top 5 compounds based on bindings with genes:
+Sunitinib 132
+Bosutinib 104
+Crizotinib 85
+Dasatinib 64
+Metformin 56
 ```
 
 ## Part 5
