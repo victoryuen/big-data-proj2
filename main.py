@@ -21,9 +21,9 @@ def main():
     print("Top 5 compounds based on bindings with genes:")
     
     for compound in top_compounds[:5]:
-       
         name_compound = id_to_name(compound[0],nodes_df)
         print(name_compound, compound[1]) 
+
     print("\n--------- Part 3 ---------\n")
 
     disease_upregulate_gene_count = mapreduce(dict_disease_upregulate_gene)
@@ -35,20 +35,23 @@ def main():
         
     print("\n---------- Part 5a ----------\n")
     
-    # something like this
-    r_3 = hashtable_memory_use(compound_bind_gene_count, "Folding",3)
-    # r_4 = hashtable_memory_use(compound_bind_gene_count, folding_hash, 4)
+    r_2 = hashtable_memory_use(compound_bind_gene_count, folding_hash, 2)
+    r_3 = hashtable_memory_use(compound_bind_gene_count, folding_hash, 3)
 
-    # print(((r_3 < r_4) ? "r = 3" : "r = 4"), "uses the least storage")
+    if r_2 < r_3:
+        print("r=2 uses less memory at", r_2, "vs", r_3)
+    else:
+        print("r=3 uses less memory at", r_3, "vs", r_2)
 
     print("\n---------- Part 5b ----------\n")
 
-    # something like this
+    r_2 = hashtable_memory_use(disease_upregulate_gene_count, folding_hash, 2)
     r_3 = hashtable_memory_use(disease_upregulate_gene_count, folding_hash, 3)
-    # r_4 = hashtable_memory_use(disease_upregulate_gene_count, folding_hash, 4)
 
-    # print(((r_3 < r_4) ? "r = 3" : "r = 4"), "uses the least storage")
-
+    if r_2 < r_3:
+        print("r=2 uses less memory at", r_2, "vs", r_3)
+    else:
+        print("r=3 uses less memory at", r_3, "vs", r_2)
 
     
 if __name__ == "__main__":

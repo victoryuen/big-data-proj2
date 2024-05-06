@@ -1,32 +1,33 @@
-import math 
-from collections import deque
-def folding_hash(id, r, table_size): 
+import sys
+from functools import reduce
 
+def folding_hash(id, r, table_size): 
     """
     Compute hash using folding method
     """
-   
     num_digits = len(id)
     left_over_digits = num_digits % r
     count = 0 
     temp_str = ""
     sum = 0 
-    for i in range(num_digits-left_over_digits):
-        temp_str+=id[i] 
-        count +=1
+
+    for i in range(num_digits - left_over_digits):
+        temp_str += id[i] 
+        count += 1
+
+        # reached one "segment" of r length
         if(count == r):
-            sum+=int(temp_str)
+            sum += int(temp_str)
             count = 0
             temp_str = ""
-    temp_str=""
-    if(left_over_digits> 0):
-        for j in range(left_over_digits):
-            temp_str+=id[num_digits-left_over_digits+j]
-        sum+=int(temp_str)
 
+    temp_str = ""
+    if(left_over_digits > 0): # remaining digits less than r length
+        for j in range(left_over_digits):
+            temp_str += id[num_digits - left_over_digits + j]
+        sum += int(temp_str)
         
     return sum % table_size
-
 
 def mid_square_hash(id,r,table_size):
     #square 
@@ -56,11 +57,7 @@ def mid_square_hash(id,r,table_size):
     return result % table_size
 
 
-
-#some assert tests
-
 def hashtable_memory_use(relationship_count, hash_function, r):
-
     """
     Takes relationship count result from mapreduce, 
     divide into 10 parts,
@@ -68,28 +65,36 @@ def hashtable_memory_use(relationship_count, hash_function, r):
     where the hashtables resolve collisions by linked list.
     Returns the memory usage of the resulting hashtables
     """
-    print(len(relationship_count))
     list_of_hashtables = [{},{},{},{},{},{},{},{},{},{}]
-    entries_per_hashtable = math.ceil(len(relationship_count) / 10)
-    print(entries_per_hashtable)
+    entries_per_hashtable = round(len(relationship_count) / 10)
+
     count_entries = 0
     count_tables = 0
-    for key,val in relationship_count.items():  
-        if(key[0:7] == "Disease"):
+
+    for key, val in relationship_count.items():  
+        # get id
+        if (key[0:7] == "Disease"):
             id  = key.split(":")[3] # splits Disease::DOID:0050156 example to  "Disease"," ","DOID","0050156"
-        elif(key[0:8] == "Compound"):
+        elif (key[0:8] == "Compound"):
             id = key.split("DB")[1]
-        if(count_tables<9 and count_entries == entries_per_hashtable):
-            count_tables+=1
+
+        # populate which table
+        if (count_entries == entries_per_hashtable and count_tables != 9):
+            count_tables += 1
             count_entries = 0
-        if(count_tables<9 and hash_function == "Folding"):
-            if(key not in list_of_hashtables[count_tables]):
-                list_of_hashtables[count_tables][folding_hash(id,r,entries_per_hashtable)] = key,val
+
+        # insertions
+        index = hash_function(id, r, entries_per_hashtable)
+        table = list_of_hashtables[count_tables]
+
+        if index in table:
+            table[index].append((key, val))
         else:
-            if(key not in list_of_hashtables[count_tables]):
-                list_of_hashtables[count_tables][folding_hash(id,r,entries_per_hashtable-1)] = key,val
-        count_entries+=1
+            table[index] = [(key, val)]
+
+        count_entries += 1
         
-        
-    print(list_of_hashtables[8])
-        
+    # testing
+    # print(list_of_hashtables)
+    
+    return reduce(lambda sum, table: sum + sys.getsizeof(table), list_of_hashtables, 0)
