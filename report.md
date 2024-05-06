@@ -89,12 +89,12 @@ for disease of counts.items()[:5]:
 ### Output
 
 ```
-Top 5 compounds based on bindings with genes:
-Sunitinib 132
-Bosutinib 104
-Crizotinib 85
-Dasatinib 64
-Metformin 56
+Top 5 disease based on upregulation with genes:
+idiopathic pulmonary fibrosis 250
+nicotine dependence 250
+Alzheimer's disease 250
+polycystic ovary syndrome 250
+malaria 250
 ```
 
 ## Part 5
