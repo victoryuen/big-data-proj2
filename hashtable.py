@@ -1,4 +1,5 @@
 import sys
+import math
 from functools import reduce
 
 def folding_hash(id, r, table_size): 
