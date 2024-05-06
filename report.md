@@ -11,14 +11,25 @@ Readin nodes.tsv and edges.tsv. Find ”tsv” is short for Tab Separated Values
 ### Pseudocode
 
 ```
-goes here
+nodes_df = pandas.read_csv("nodes.tsv", '\t')
+edges_df = pandas.read_csv("edges.tsv", '\t')
+
+dictionary = {}
+
+source_nodes_df = nodes_df[kind == source_node_type]
+for item in source_nodes_df:
+    dictionary[item[id]] = []
+
+relationships_df = edges_df[metaedge == edge_type]
+for item in relationships_df:
+    dictionary[item[source]].append(item[target])
+
+return dictionary
 ```
 
 ### Output
 
-```
-goes here
-```
+(N/A)
 
 ## Part 2
 
