@@ -16,6 +16,7 @@ def main():
 
     compound_bind_gene_count = mapreduce(dict_compound_bind_gene)
     
+    
     top_compounds = sorted(compound_bind_gene_count.items(), key = lambda x: x[1], reverse=True)
     print("Top 5 compounds based on bindings with genes:")
     
@@ -35,7 +36,7 @@ def main():
     print("\n---------- Part 5a ----------\n")
     
     # something like this
-    # r_3 = hashtable_memory_use(compound_bind_gene_count, folding_hash, 3)
+    r_3 = hashtable_memory_use(compound_bind_gene_count, "Folding",3)
     # r_4 = hashtable_memory_use(compound_bind_gene_count, folding_hash, 4)
 
     # print(((r_3 < r_4) ? "r = 3" : "r = 4"), "uses the least storage")
@@ -43,7 +44,7 @@ def main():
     print("\n---------- Part 5b ----------\n")
 
     # something like this
-    # r_3 = hashtable_memory_use(disease_upregulate_gene_count, folding_hash, 3)
+    r_3 = hashtable_memory_use(disease_upregulate_gene_count, folding_hash, 3)
     # r_4 = hashtable_memory_use(disease_upregulate_gene_count, folding_hash, 4)
 
     # print(((r_3 < r_4) ? "r = 3" : "r = 4"), "uses the least storage")
