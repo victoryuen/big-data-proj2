@@ -40,13 +40,28 @@ For each compound, compute the number of genes that are BIND (CbG) to it using M
 ### Pseudocode
 
 ```
-goes here
+node, edge = dict_CbG.items()
+initial_counts = [(node, 1) for _ in edge]
+
+counts = {}
+node, edge_count = initial_counts
+counts[node] = counts.get(node, 0) + edge_count
+
+sort(counts)
+
+for compound of counts.items()[:5]:
+    print(nodes_df[id == compound[0].id][name], compound[1])
 ```
 
 ### Output
 
 ```
-goes here
+Top 5 compounds based on bindings with genes:
+Sunitinib 132
+Bosutinib 104
+Crizotinib 85
+Dasatinib 64
+Metformin 56
 ```
 
 ## Part 3
