@@ -87,15 +87,12 @@ def hashtable_memory_use(relationship_count, hash_function, r):
         # insertions
         index = hash_function(id, r, entries_per_hashtable)
         table = list_of_hashtables[count_tables]
-
+        
         if index in table:
             table[index].append((key, val))
         else:
             table[index] = [(key, val)]
 
         count_entries += 1
-        
-    # testing
-    # print(list_of_hashtables)
-    
+            
     return reduce(lambda sum, table: sum + sys.getsizeof(table), list_of_hashtables, 0)

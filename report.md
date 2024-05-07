@@ -1,5 +1,7 @@
 # CSCI 493.76: Big Data Technologies
+
 # Project 2
+
 # Steven Hsui, Victor Yuen
 
 ## Part 1
@@ -108,15 +110,59 @@ Picked Folding Method
 ### Pseudocode
 
 ```
-goes here
+def folding_hash(id, r, table_size):
+    num_digits = len(id)
+    left_over_digits = num_digits % r
+    count = 0
+    temp_str = ""
+    sum = 0
+
+    for i in range(num_digits - left_over_digits):
+        temp_str += id[i]
+        count += 1
+        if(count == r):
+            sum += int(temp_str)
+            count = 0
+            temp_str = ""
+    temp_str = ""
+    if(left_over_digits > 0): # remaining digits less than r length
+        for j in range(left_over_digits):
+            temp_str += id[num_digits - left_over_digits + j]
+        sum += int(temp_str)
+    return sum % table_size
+
+def hashtable_memory_use(relationship_count, hash_function, r):
+    list_of_hashtables = [ 10 dicts]
+    entries_per_hashtable = len(total entries) / 10
+    for key,val in relationship_count:
+        if key == disease:
+            id = key.split()
+        else key == compound:
+            id  = key.split()
+        if (count_entries == entries_per_hashtable and count_tables != 9):
+                count_tables += 1
+                count_entries = 0
+        index = hash_function(id, r, entries_per_hashtable)
+        table = list_of_hashtables[count_tables]
+
+            if index in table:
+                table[index].append((key, val))
+            else:
+                table[index] = [(key, val)]
+
+            count_entries += 1
+    return reduce(lambda sum, table: sum + sys.getsizeof(table), list_of_hashtables, 0)
 ```
 
 ### Output
 
 ```
-goes here
+r=2 uses less memory at 13952 vs 46960
+both use the same memory at 2320
+
 ```
 
 ## References
+
 - MapReduce_Count_Friends.py from course Blackboard
 - Pandas documentation: https://pandas.pydata.org/docs/
