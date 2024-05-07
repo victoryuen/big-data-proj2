@@ -116,8 +116,7 @@ def folding_hash(id, r, table_size):
     count = 0
     temp_str = ""
     sum = 0
-
-    for i in range(num_digits - left_over_digits):
+    for i in range(amt_digits_excluding_end):
         temp_str += id[i]
         count += 1
         if(count == r):
@@ -125,7 +124,7 @@ def folding_hash(id, r, table_size):
             count = 0
             temp_str = ""
     temp_str = ""
-    if(left_over_digits > 0): # remaining digits less than r length
+    if(left_over_digits > 0):
         for j in range(left_over_digits):
             temp_str += id[num_digits - left_over_digits + j]
         sum += int(temp_str)
