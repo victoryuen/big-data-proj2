@@ -156,8 +156,13 @@ def hashtable_memory_use(relationship_count, hash_function, r):
 ### Output
 
 ```
-r=2 uses less memory at 13952 vs 46960
-both use the same memory at 2320
+---------- Part 5a ----------
+
+r=2 uses less memory at 13872 vs 46880
+
+---------- Part 5b ----------
+
+both use the same memory at 2240
 
 ```
 
